@@ -36,10 +36,24 @@ actor {
       title = "Campaign Trail: Candidates Focus on Swing States";
       content = "<p>With just weeks to go before Election Day, both presidential candidates are intensifying their efforts in key swing states. Recent rallies in Pennsylvania, Michigan, and Wisconsin have drawn large crowds, with each candidate tailoring their message to address local concerns and issues.</p><p>The incumbent's campaign is emphasizing economic recovery and job creation, particularly in states hit hard by manufacturing declines. Meanwhile, the challenger is focusing on healthcare reform and climate change policies, aiming to energize younger voters and suburban demographics.</p><p>Local politicians and celebrities are joining the candidates on the trail, adding star power to these crucial campaign events. Both sides are also leveraging social media and virtual events to reach voters while adhering to COVID-19 safety guidelines.</p><p>As the race tightens, political analysts are closely watching how these targeted campaign efforts might sway undecided voters in these battleground states, which could ultimately determine the election's outcome.</p>";
       imageUrl = ?"https://example.com/campaign-trail-image.jpg";
+      timestamp = Time.now() - 21600000000000;
+    },
+    {
+      id = 3;
+      title = "Election Security Measures Ramped Up";
+      content = "<p>As Election Day approaches, federal and state officials are implementing unprecedented security measures to protect the integrity of the voting process. The Department of Homeland Security, in collaboration with state election boards, has announced a series of initiatives to safeguard against potential cyber threats and misinformation campaigns.</p><p>Key measures include enhanced cybersecurity protocols for voting machines and election management systems, increased monitoring of social media platforms for disinformation, and the deployment of rapid response teams to address any security breaches or irregularities.</p><p>Election officials are also working to educate voters about the security of mail-in ballots and the importance of verifying information from credible sources. These efforts aim to boost public confidence in the electoral process and ensure a smooth, secure election.</p>";
+      imageUrl = ?"https://example.com/election-security-image.jpg";
+      timestamp = Time.now() - 10800000000000;
+    },
+    {
+      id = 4;
+      title = "Economic Policies Take Center Stage in Campaign";
+      content = "<p>As the election draws near, economic policies have become a focal point of both campaigns. The candidates have presented contrasting visions for America's economic future, sparking intense debates among voters and economists alike.</p><p>The incumbent is championing their administration's pre-pandemic economic growth and promising a rapid recovery through tax cuts and deregulation. In contrast, the challenger is proposing significant investments in infrastructure, clean energy, and education, funded partly by increased taxes on corporations and high-income earners.</p><p>Economic experts are divided on the potential impacts of these policies, with some warning of increased national debt under both plans. Voters in rust belt states and urban centers are paying particularly close attention to proposals addressing job creation and income inequality.</p><p>As Election Day approaches, both candidates are expected to further refine and promote their economic plans, recognizing the crucial role the economy plays in swaying undecided voters.</p>";
+      imageUrl = ?"https://example.com/economic-policy-image.jpg";
       timestamp = Time.now();
     }
   ];
-  stable var nextPostId : Nat = 3;
+  stable var nextPostId : Nat = 5;
 
   public func createPost(title: Text, content: Text, imageUrl: ?Text) : async Nat {
     let post : Post = {
