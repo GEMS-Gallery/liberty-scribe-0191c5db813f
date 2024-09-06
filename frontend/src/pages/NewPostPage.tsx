@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { backend } from 'declarations/backend';
-import { Typography, TextField, Button, Box, CircularProgress } from '@mui/material';
+import { Typography, TextField, Button, Box, CircularProgress, Alert } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw } from 'draft-js';
@@ -16,16 +16,19 @@ interface FormData {
 const NewPostPage: React.FC = () => {
   const { control, handleSubmit } = useForm<FormData>();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const onSubmit = async (data: FormData) => {
     setLoading(true);
+    setError(null);
     try {
       const contentHtml = draftToHtml(convertToRaw(data.content.getCurrentContent()));
       const postId = await backend.createPost(data.title, contentHtml, data.imageUrl ? [data.imageUrl] : []);
       navigate(`/post/${postId}`);
     } catch (error) {
       console.error('Error creating post:', error);
+      setError('Failed to create post. Please try again later.');
     } finally {
       setLoading(false);
     }
@@ -36,6 +39,7 @@ const NewPostPage: React.FC = () => {
       <Typography variant="h4" gutterBottom>
         Create New Post
       </Typography>
+      {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
       <Controller
         name="title"
         control={control}

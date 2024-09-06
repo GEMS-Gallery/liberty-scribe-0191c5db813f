@@ -4,7 +4,7 @@ import { backend } from 'declarations/backend';
 import { Typography, Card, CardContent, CardMedia, Grid, Link, CircularProgress, Alert } from '@mui/material';
 
 interface Post {
-  id: number;
+  id: bigint;
   title: string;
   content: string;
   imageUrl: string | null;
@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
         setLoading(true);
         setError(null);
         const result = await backend.getPosts();
-        console.log('Fetched posts:', result); // Debug log
+        console.log('Fetched posts:', result);
         setPosts(result);
       } catch (error) {
         console.error('Error fetching posts:', error);
@@ -50,7 +50,7 @@ const HomePage: React.FC = () => {
   return (
     <Grid container spacing={4}>
       {posts.map((post) => (
-        <Grid item xs={12} sm={6} md={4} key={post.id}>
+        <Grid item xs={12} sm={6} md={4} key={post.id.toString()}>
           <Card>
             {post.imageUrl && (
               <CardMedia
@@ -67,7 +67,7 @@ const HomePage: React.FC = () => {
               <Typography variant="body2" color="text.secondary" noWrap>
                 {post.content.replace(/<[^>]*>/g, '').substring(0, 100)}...
               </Typography>
-              <Link component={RouterLink} to={`/post/${post.id}`}>
+              <Link component={RouterLink} to={`/post/${post.id.toString()}`}>
                 Read more
               </Link>
             </CardContent>
