@@ -9,3 +9,20 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.editor-wrapper {
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.editor-editor {
+  min-height: 300px;
+  padding: 10px;
+}
+
+.editor-toolbar {
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}

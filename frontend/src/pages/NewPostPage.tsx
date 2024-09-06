@@ -63,9 +63,9 @@ const NewPostPage: React.FC = () => {
           <Editor
             editorState={field.value}
             onEditorStateChange={field.onChange}
-            wrapperClassName="wrapper-class"
-            editorClassName="editor-class"
-            toolbarClassName="toolbar-class"
+            wrapperClassName="editor-wrapper"
+            editorClassName="editor-editor"
+            toolbarClassName="editor-toolbar"
           />
         )}
       />
