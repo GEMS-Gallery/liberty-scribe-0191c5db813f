@@ -3,10 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { backend } from 'declarations/backend';
 import { Typography, TextField, Button, Box, CircularProgress } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
+import { Editor } from 'react-draft-wysiwyg';
+import { EditorState, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
 
 interface FormData {
   title: string;
-  content: string;
+  content: EditorState;
   imageUrl: string;
 }
 
@@ -18,7 +21,8 @@ const NewPostPage: React.FC = () => {
   const onSubmit = async (data: FormData) => {
     setLoading(true);
     try {
-      const postId = await backend.createPost(data.title, data.content, data.imageUrl ? [data.imageUrl] : []);
+      const contentHtml = draftToHtml(convertToRaw(data.content.getCurrentContent()));
+      const postId = await backend.createPost(data.title, contentHtml, data.imageUrl ? [data.imageUrl] : []);
       navigate(`/post/${postId}`);
     } catch (error) {
       console.error('Error creating post:', error);
@@ -53,20 +57,15 @@ const NewPostPage: React.FC = () => {
       <Controller
         name="content"
         control={control}
-        defaultValue=""
+        defaultValue={EditorState.createEmpty()}
         rules={{ required: 'Content is required' }}
-        render={({ field, fieldState: { error } }) => (
-          <TextField
-            {...field}
-            margin="normal"
-            required
-            fullWidth
-            id="content"
-            label="Content"
-            multiline
-            rows={4}
-            error={!!error}
-            helperText={error ? error.message : null}
+        render={({ field }) => (
+          <Editor
+            editorState={field.value}
+            onEditorStateChange={field.onChange}
+            wrapperClassName="wrapper-class"
+            editorClassName="editor-class"
+            toolbarClassName="toolbar-class"
           />
         )}
       />
