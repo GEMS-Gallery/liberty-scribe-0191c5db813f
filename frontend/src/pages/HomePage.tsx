@@ -52,7 +52,7 @@ const HomePage: React.FC = () => {
                 {post.title}
               </Typography>
               <Typography variant="body2" color="text.secondary" noWrap>
-                {post.content}
+                {post.content.replace(/<[^>]*>/g, '').substring(0, 100)}...
               </Typography>
               <Link component={RouterLink} to={`/post/${post.id}`}>
                 Read more

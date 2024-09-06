@@ -57,9 +57,7 @@ const PostPage: React.FC = () => {
         <Typography gutterBottom variant="h4" component="div">
           {post.title}
         </Typography>
-        <Typography variant="body1" color="text.secondary">
-          {post.content}
-        </Typography>
+        <Typography variant="body1" color="text.secondary" dangerouslySetInnerHTML={{ __html: post.content }} />
         <Typography variant="caption" color="text.secondary">
           Posted on: {new Date(Number(post.timestamp) / 1000000).toLocaleString()}
         </Typography>
