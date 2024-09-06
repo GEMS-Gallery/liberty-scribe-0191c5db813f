@@ -1,0 +1,13 @@
+type Post = 
+ record {
+   content: text;
+   id: nat;
+   imageUrl: opt text;
+   timestamp: int;
+   title: text;
+ };
+service : {
+  createPost: (text, text, opt text) -> (nat);
+  getPost: (nat) -> (opt Post) query;
+  getPosts: () -> (vec Post) query;
+}
